@@ -1,3 +1,4 @@
+import FromToCurrency from './FromToCurrency';
 import './main.css';
 import { FC } from 'react';
 
@@ -22,17 +23,17 @@ const InputForm: FC<InputFormProps> = ({ amount, setAmount, fromCurrency, setFro
         className="input"
       />
       <div>
-        <select value={fromCurrency} onChange={(e) => setFromCurrency(e.target.value)} className="select">
-          {currencies.map((currency) => (
-            <option key={currency} value={currency}>{currency}</option>
-          ))}
-        </select>
+        <FromToCurrency
+        value={fromCurrency}
+        onChange={setFromCurrency}
+        currencies={currencies}
+        />
         <span className="span"> в </span>
-        <select value={toCurrency} onChange={(e) => setToCurrency(e.target.value)} className="select">
-          {currencies.map((currency) => (
-            <option key={currency} value={currency}>{currency}</option>
-          ))}
-        </select>
+        <FromToCurrency
+        value={toCurrency}
+        onChange={setToCurrency}
+        currencies={currencies}
+        />
       </div>
     </div>
   );
