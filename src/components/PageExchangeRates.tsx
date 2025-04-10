@@ -3,6 +3,9 @@ import { fetchCurrencies } from '../services/api';
 import RatesTable from './RatesTable'; 
 import './main.css';
 
+const LOCAL_KEYS = {
+  favorites : 'favorites',
+}
 
 const PageExchangeRates = () => {
   const [rates, setRates] = useState<Record<string, number>>({});
@@ -24,9 +27,15 @@ const PageExchangeRates = () => {
   }, []);
 
   useEffect(() => {
-    const storedFavorites = localStorage.getItem('favorites');
+    const storedFavorites = localStorage.getItem(LOCAL_KEYS.favorites);
     if (storedFavorites) {
+      try{
       setFavorites(JSON.parse(storedFavorites));
+      }
+      catch(error){
+        console.error('Ошибка:', error)
+      }
+      setFavorites([])
     }
   }, []);
 
@@ -36,7 +45,7 @@ const PageExchangeRates = () => {
         ? prevFavorites.filter((fav) => fav !== currency)
         : [...prevFavorites, currency];
 
-      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      localStorage.setItem(LOCAL_KEYS.favorites, JSON.stringify(newFavorites));
       return newFavorites;
     });
   };
