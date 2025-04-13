@@ -1,5 +1,4 @@
 import FromToCurrency from './FromToCurrency';
-import './main.css';
 import { FC } from 'react';
 
 type InputFormProps ={

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchCurrencies } from '../services/api';
 import RatesTable from './RatesTable'; 
-import './main.css';
 
 const LOCAL_KEYS = {
   favorites : 'favorites',

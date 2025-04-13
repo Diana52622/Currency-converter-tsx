@@ -6,7 +6,7 @@ const App = () => {
     return(
       <Router>
         <div>
-          <ul>
+          <ul className='ul'>
             <li>
               <Link to='/'>Конвертер валют</Link>
             </li>

@@ -1,4 +1,3 @@
-import './main.css';
 import { FC } from 'react';
 
 type Props = {
