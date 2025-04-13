@@ -8,22 +8,27 @@ type RatesTableProps = {
   showAll: boolean;
 }
 
+const countRates = 10
+
+const sortRates = (rates: Record<string, number>, favorites: string[]) => 
+  Object.entries(rates).sort((a, b) => {
+  const [keyA] = a;
+  const [keyB] = b;
+
+  const isAFavorite = favorites.includes(keyA);
+  const isBFavorite = favorites.includes(keyB);
+
+  if (isAFavorite && !isBFavorite) return -1;
+  if (!isAFavorite && isBFavorite) return 1;
+
+  return 0;
+});
+
 const RatesTable: FC<RatesTableProps> = ({ rates = {}, favorites, toggleFavorite, showAll }) => {
 
-  const sortedRates = Object.entries(rates).sort((a, b) => {
-    const [keyA] = a;
-    const [keyB] = b;
+  const sortedRates = sortRates(rates, favorites)
 
-    const isAFavorite = favorites.includes(keyA);
-    const isBFavorite = favorites.includes(keyB);
-
-    if (isAFavorite && !isBFavorite) return -1;
-    if (!isAFavorite && isBFavorite) return 1;
-
-    return 0;
-  });
-
-  const countShow = showAll ? sortedRates.length : 10
+  const countShow = showAll ? sortedRates.length : countRates
   const currenciesShow = sortedRates.slice(0, countShow)
   
   return (
